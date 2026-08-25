@@ -44,4 +44,4 @@ gcc -o biblioteca.c biblioteca
 Una volta terminata la compilazione senza errori, avvia il programma dal terminale:
 
 * **Su Mac/Linux:** `./biblioteca`
-* **Su Windows:** `.\biblioteca.exe`
+* **Su Windows:** `biblioteca.exe`
