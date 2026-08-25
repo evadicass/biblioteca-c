@@ -37,7 +37,7 @@ Per far funzionare questo progetto hai bisogno di un compilatore C (come GCC o C
 Apri il terminale, spostati nella cartella in cui hai salvato il progetto e compila il file `biblioteca.c` eseguendo:
 
 ```bash
-gcc -o biblioteca.c biblioteca
+gcc -o biblioteca biblioteca.c
 ```
 
 **2. Esecuzione**
