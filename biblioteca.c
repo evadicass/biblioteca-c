@@ -154,6 +154,187 @@ NODO *cancellaLibro (NODO *head) {
 	return head;
 }
 
+/**********************************************
+ ***************** RICERCA ********************
+ **********************************************/
+
+void esisteLibro (NODO *head) {
+	NODO *nodoCorrente = head;
+	int trovato = 0;
+	int input = -1;
+
+	while(input!=1 && input!=2 && input!=3 && input!=4 && input!=5) {
+		printf("Come vuoi cercare?\nPremi (1) se per titolo\nPremi (2) se per autore\nPremi (3) se per ID\nPremi (4) se per anno\nPremi (5) se per genere\n");
+		scanf("%d%*c", &input);
+	}
+
+	/* RICERCA PER TITOLO */
+	if(input==1) {
+
+		char titoloDaTrovare[30];
+		printf("\nCome si intitola il libro da cercare?  ");
+		fgets(titoloDaTrovare, 30, stdin);
+		titoloDaTrovare[strlen(titoloDaTrovare)-1]='\0';
+
+		while(nodoCorrente!=NULL && !trovato) {
+			if(strcmp(nodoCorrente->libro.titolo, titoloDaTrovare)==0) {
+				printf("\nLibro trovato!\n\n");
+				stampaLibro(&(nodoCorrente->libro));
+				trovato = 1;
+			}
+			else
+				nodoCorrente = nodoCorrente->next;
+		}
+
+		if(trovato==0)
+			printf("\nNessun libro con questo titolo trovato!\n\n");
+	}
+
+	/* RICERCA PER AUTORE */
+	if(input==2) {
+
+		char autoreDaTrovare[30];
+		printf("\nDi quale autore cerchi il libro?  ");
+		fgets(autoreDaTrovare, 30, stdin);
+		autoreDaTrovare[strlen(autoreDaTrovare)-1]='\0';
+
+		int quanti=0;
+
+		while(nodoCorrente!=NULL) {
+			if(strcmp(nodoCorrente->libro.autore, autoreDaTrovare)==0) {
+				trovato = 1;
+				quanti++;
+				nodoCorrente = nodoCorrente->next;
+			}
+			else
+				nodoCorrente = nodoCorrente->next;
+		}
+
+		if(trovato==1) {
+			if(quanti==1)
+				printf("\n%c stato trovato un solo libro con questo autore:\n\n", 212);
+			else
+				printf("\nSono stati trovati in totale %d libri con questo autore:\n\n", quanti);
+
+			NODO *nodoCorr = head;
+
+			while(nodoCorr!=NULL) {
+				if(strcmp(nodoCorr->libro.autore, autoreDaTrovare)==0) {
+					stampaLibro(&(nodoCorr->libro));
+					nodoCorr = nodoCorr->next;
+				}
+				else
+					nodoCorr = nodoCorr->next;
+			}
+		}
+		else
+			printf("\nNessun libro con questo autore trovato!\n\n");
+	}
+
+	/* RICERCA PER ID */
+	if(input==3) {
+
+		int idDaTrovare;
+		printf("\nQual'%c l'ID di cui cerchi il libro?  ", 138);
+		scanf("%d%*c", &idDaTrovare);
+
+		while(nodoCorrente!=NULL && !trovato) {
+			if(nodoCorrente->libro.id == idDaTrovare) {
+				printf("\nEcco il libro con l'ID cercato:\n\n");
+				stampaLibro(&(nodoCorrente->libro));
+				trovato=1;
+			}
+			else
+				nodoCorrente = nodoCorrente->next;
+		}
+
+		if(trovato==0)
+			printf("\nNessun libro con questo ID trovato!\n\n");
+	}
+
+	/* RICERCA PER ANNO */
+	if(input==4) {
+
+		int annoDaTrovare;
+		printf("\nDi quale anno cerchi il libro?  ");
+		scanf("%d%*c", &annoDaTrovare);
+
+		int quanti=0;
+
+		while(nodoCorrente!=NULL) {
+			if(nodoCorrente->libro.anno == annoDaTrovare) {
+				trovato = 1;
+				quanti++;
+				nodoCorrente = nodoCorrente->next;
+			}
+			else
+				nodoCorrente = nodoCorrente->next;
+		}
+
+		if(trovato==1) {
+			if(quanti==1)
+				printf("\n%c stato trovato un solo libro di questo anno:\n\n", 212);
+			else
+				printf("\nSono stati trovati in totale %d libri di questo anno:\n\n", quanti);
+
+			NODO *nodoCorr = head;
+
+			while(nodoCorr!=NULL) {
+				if(nodoCorr->libro.anno == annoDaTrovare) {
+					stampaLibro(&(nodoCorr->libro));
+					nodoCorr = nodoCorr->next;
+				}
+				else
+					nodoCorr = nodoCorr->next;
+			}
+		}
+		else
+			printf("\nNessun libro di questo anno trovato!\n\n");
+
+	}
+
+	/* RICERCA PER GENERE */
+	if(input==5) {
+
+		char genereDaTrovare[30];
+		printf("\nDi quale genere cerchi il libro?  ");
+		fgets(genereDaTrovare, 30, stdin);
+		genereDaTrovare[strlen(genereDaTrovare)-1]='\0';
+
+		int quanti=0;
+
+		while(nodoCorrente!=NULL) {
+			if(strcmp(nodoCorrente->libro.genere, genereDaTrovare)==0) {
+				trovato = 1;
+				quanti++;
+				nodoCorrente = nodoCorrente->next;
+			}
+			else
+				nodoCorrente = nodoCorrente->next;
+		}
+
+		if(trovato==1) {
+			if(quanti==1)
+				printf("\n%c stato trovato un solo libro di questo genere:\n\n", 212);
+			else
+				printf("\nSono stati trovati in totale %d libri di questo genere:\n\n", quanti);
+
+			NODO *nodoCorr = head;
+
+			while(nodoCorr!=NULL) {
+				if(strcmp(nodoCorr->libro.genere, genereDaTrovare)==0) {
+					stampaLibro(&(nodoCorr->libro));
+					nodoCorr = nodoCorr->next;
+				}
+				else
+					nodoCorr = nodoCorr->next;
+			}
+		}
+		else
+			printf("\nNessun libro di questo genere trovato!\n\n");
+	}
+}
+
 
 /**********************************************
  **************** FILE ************************
@@ -256,6 +437,7 @@ int main() {
 		printf("1: Visualizzazione\n");
 		printf("2: Inserimento\n");
 		printf("3: Cancellazione\n");
+		printf("4: Ricerca\n");
 		printf("0: Termina il programma\n\n");
 		scanf("%d%*c", &risposta);
 
@@ -265,6 +447,8 @@ int main() {
 			head=inserisciCoda(head, &prossimo_id);
 		else if(risposta==3)
 			head=cancellaLibro(head);
+		else if(risposta==4)
+			esisteLibro(head);
 		else if(risposta==0) {
 			printf("Finito!\n\n");
 			salvataggio(head);

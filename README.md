@@ -31,16 +31,17 @@ Il programma si occupa di gestire una biblioteca, permettendo di inserire ed eli
 
 ## Come compilare ed eseguire il codice
 
-Per far funzionare questo progetto hai bisogno di un compilatore C (come GCC o Clang) installato nel tuo sistema..
+Per far funzionare questo progetto hai bisogno di un compilatore C (come GCC o Clang) installato nel tuo sistema.
 
 **1. Compilazione**
 Apri il terminale, spostati nella cartella in cui hai salvato il progetto e compila il file `biblioteca.c` eseguendo:
 
 ```bash
 gcc -o biblioteca.c biblioteca
+```
 
 **2. Esecuzione**
 Una volta terminata la compilazione senza errori, avvia il programma dal terminale:
 
 * **Su Mac/Linux:** `./biblioteca`
-* **Su Windows:** `.\biblioteca.exe`
+* **Su Windows:** `biblioteca.exe`
