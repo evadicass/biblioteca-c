@@ -13,7 +13,7 @@ typedef struct Libro {
 	int pagine;
 	int anno;
 	char genere[30];
-	char d;             // d vale d se disponibile, p se prestato
+	char status;             // vale d se disponibile, p se prestato
 
 } LIBRO;
 
@@ -33,7 +33,7 @@ void stampaLibro (LIBRO *libro) {
 	printf("Numero di pagine: %d\n", libro->pagine);
 	printf("Anno di pubblicazione: %d\n", libro->anno);
 	printf("Genere: %s\n", libro->genere);
-	if(libro->d == 'd')
+	if(libro->status == 'd')
 		printf("Disponibile!\n\n");
 	else
 		printf("Prestato!\n\n");
@@ -77,7 +77,7 @@ void inserisciLibro(LIBRO *libro) {
 	fgets(libro->genere, 30, stdin);
 	(libro->genere)[strlen(libro->genere)-1]='\0';
 
-	libro->d = 'd';
+	libro->status = 'd';
 }
 
 NODO *inserisciCoda (NODO *head, int *prossimo_id) {
@@ -172,11 +172,11 @@ NODO *acquisizione (NODO *head, int *prossimo_id) {
 		int pagine;
 		int anno;
 		char genere[30];
-		char d;
+		char status;
 
 		int massimo_id=0;
 
-		while(fscanf(fp, "%d%*c%[^\t]%*c%[^\t]%*c%d%*c%d%*c%[^\t]%*c%c%*c", &id, titolo, autore, &pagine, &anno, genere, &d)>0) {
+		while(fscanf(fp, "%d%*c%[^\t]%*c%[^\t]%*c%d%*c%d%*c%[^\t]%*c%c%*c", &id, titolo, autore, &pagine, &anno, genere, &status)>0) {
 
 				NODO *nuovoNodo = malloc(sizeof(NODO));
 				if(nuovoNodo==NULL) {
@@ -193,7 +193,7 @@ NODO *acquisizione (NODO *head, int *prossimo_id) {
 				nuovoNodo->libro.pagine=pagine;
 				nuovoNodo->libro.anno=anno;
 				strcpy(nuovoNodo->libro.genere, genere);
-				nuovoNodo->libro.d=d;
+				nuovoNodo->libro.status=status;
 
 				/* inserimento in coda */
 				if(head==NULL)
@@ -222,7 +222,7 @@ void salvataggio (NODO *head) {
 		printf("Errore salvataggio file!\n\n");
 	else {
 		while(nodo != NULL) {
-			fprintf(fp, "%d\t%s\t%s\t%d\t%d\t%s\t%c\n", nodo->libro.id, nodo->libro.titolo, nodo->libro.autore, nodo->libro.pagine, nodo->libro.anno, nodo->libro.genere, nodo->libro.d);
+			fprintf(fp, "%d\t%s\t%s\t%d\t%d\t%s\t%c\n", nodo->libro.id, nodo->libro.titolo, nodo->libro.autore, nodo->libro.pagine, nodo->libro.anno, nodo->libro.genere, nodo->libro.status);
 			nodo = nodo->next; 
 		}
 
