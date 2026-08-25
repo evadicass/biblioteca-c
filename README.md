@@ -38,6 +38,7 @@ Apri il terminale, spostati nella cartella in cui hai salvato il progetto e comp
 
 ```bash
 gcc -o biblioteca.c biblioteca
+```
 
 **2. Esecuzione**
 Una volta terminata la compilazione senza errori, avvia il programma dal terminale:
