@@ -1,0 +1,5 @@
+1	1984	George Orwell	328	1949	Distopico	d
+2	Il conte di Montecristo	Alexandre Dumas	1247	1844	Avventura	d
+3	Dune	Frank Herbert	688	1965	Fantascienza	d
+4	Il nome della rosa	Umberto Eco	503	1980	Giallo storico	d
+5	Orgoglio e pregiudizio	Jane Austen	432	1813	Romanzo rosa	d
