@@ -3,3 +3,8 @@
 3	Dune	Frank Herbert	688	1965	Fantascienza	d
 4	Il nome della rosa	Umberto Eco	503	1980	Giallo storico	d
 5	Orgoglio e pregiudizio	Jane Austen	432	1813	Romanzo rosa	d
+6	Il grande Gatsby	F. Scott Fitzgerald	180	1925	Drammatico	d
+7	Le metamorfosi	Franz Kafka	120	1915	Racconto	d
+8	Cime tempestose	Emily Bronte	400	1847	Drammatico	d
+9	Il ritratto di Dorian Gray	Oscar Wilde	256	1890	Racconto	d
+10	La fattoria degli animali	George Orwell	140	1945	Distopico	d

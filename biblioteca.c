@@ -43,9 +43,9 @@ void stampaLista (NODO *head) {
 	NODO *nodoCorrente = head;
 
 	if(head==NULL)
-		printf("File vuoto!\n\n");
+		printf("Biblioteca vuota!\n\n");
 	else {
-		printf("Ecco la lista:\n\n");
+		printf("Ecco la lista dei libri:\n\n");
 		while(nodoCorrente != NULL) {
 			stampaLibro(&(nodoCorrente->libro));
 			nodoCorrente = nodoCorrente->next;
@@ -111,6 +111,10 @@ NODO *inserisciCoda (NODO *head, int *prossimo_id) {
  **********************************************/
 
 NODO *cancellaLibro (NODO *head) {
+	if(head==NULL) {
+		printf("\nBiblioteca vuota: nessun libro da eliminare!\n\n");
+		return head;
+	}
 
 	char libroDaCancellare[30];
 	printf("Come si intitola il libro da eliminare?  ");
@@ -119,34 +123,30 @@ NODO *cancellaLibro (NODO *head) {
 
 	int eliminato = 0;
 
-	if(head==NULL)
-		printf("\nLista vuota: nessun libro da eliminare!\n\n");
-	else {
-		/* il libro da eliminare è il primo */
-		while(head != NULL && (strcmp(head->libro.titolo, libroDaCancellare)==0) && !eliminato) {
-			NODO *temp = head;
-			head = head->next;
-			free(temp);
-			eliminato=1;
-			printf("\nCancellazione effettuata!\n\n");
-		}
+	/* il libro da eliminare è il primo */
+	while(head != NULL && (strcmp(head->libro.titolo, libroDaCancellare)==0) && !eliminato) {
+		NODO *temp = head;
+		head = head->next;
+		free(temp);
+		eliminato=1;
+		printf("\nCancellazione effettuata!\n\n");
+	}
 
-		/* il libro da eliminare è nel resto della lista */
-		if(head != NULL) {
-			NODO *nodoPrec = head;
-			NODO *nodoCorr = head->next;
+	/* il libro da eliminare è nel resto della lista */
+	if(head != NULL) {
+		NODO *nodoPrec = head;
+		NODO *nodoCorr = head->next;
 
-			while(nodoCorr != NULL && !eliminato) {
-				if(strcmp(nodoCorr->libro.titolo, libroDaCancellare)==0) {
-					nodoPrec->next = nodoCorr->next;
-					free(nodoCorr);
-					eliminato=1;
-					printf("Cancellazione effettuata!\n\n");
-				}
-				else {
-					nodoPrec = nodoCorr;
-					nodoCorr = nodoCorr->next;
-				}
+		while(nodoCorr != NULL && !eliminato) {
+			if(strcmp(nodoCorr->libro.titolo, libroDaCancellare)==0) {
+				nodoPrec->next = nodoCorr->next;
+				free(nodoCorr);
+				eliminato=1;
+				printf("Cancellazione effettuata!\n\n");
+			}
+			else {
+				nodoPrec = nodoCorr;
+				nodoCorr = nodoCorr->next;
 			}
 		}
 	}
@@ -155,16 +155,21 @@ NODO *cancellaLibro (NODO *head) {
 }
 
 /**********************************************
- ***************** RICERCA ********************
+ **************** RICERCA *********************
  **********************************************/
 
-void esisteLibro (NODO *head) {
+void cercaLibro (NODO *head) {
 	NODO *nodoCorrente = head;
-	int trovato = 0;
 	int input = -1;
+	int trovato = 0;
 
-	while(input!=1 && input!=2 && input!=3 && input!=4 && input!=5) {
-		printf("Come vuoi cercare?\nPremi (1) se per titolo\nPremi (2) se per autore\nPremi (3) se per ID\nPremi (4) se per anno\nPremi (5) se per genere\n");
+	if(head==NULL) {
+		printf("\nBiblioteca vuota: nessun libro da cercare!\n\n");
+		return;
+	}
+
+	while(input!=1 && input!=2 && input!=3 && input!=4 && input!=5 && input!=6) {
+		printf("Come vuoi cercare?\nPremi (1) se per titolo\nPremi (2) se per autore\nPremi (3) se per ID\nPremi (4) se per anno\nPremi (5) se per genere\nPremi (6) se per disponibilit%c\n\n", 133);
 		scanf("%d%*c", &input);
 	}
 
@@ -204,10 +209,9 @@ void esisteLibro (NODO *head) {
 			if(strcmp(nodoCorrente->libro.autore, autoreDaTrovare)==0) {
 				trovato = 1;
 				quanti++;
-				nodoCorrente = nodoCorrente->next;
 			}
-			else
-				nodoCorrente = nodoCorrente->next;
+
+			nodoCorrente = nodoCorrente->next;
 		}
 
 		if(trovato==1) {
@@ -219,12 +223,10 @@ void esisteLibro (NODO *head) {
 			NODO *nodoCorr = head;
 
 			while(nodoCorr!=NULL) {
-				if(strcmp(nodoCorr->libro.autore, autoreDaTrovare)==0) {
+				if(strcmp(nodoCorr->libro.autore, autoreDaTrovare)==0)
 					stampaLibro(&(nodoCorr->libro));
-					nodoCorr = nodoCorr->next;
-				}
-				else
-					nodoCorr = nodoCorr->next;
+
+				nodoCorr = nodoCorr->next;
 			}
 		}
 		else
@@ -265,10 +267,9 @@ void esisteLibro (NODO *head) {
 			if(nodoCorrente->libro.anno == annoDaTrovare) {
 				trovato = 1;
 				quanti++;
-				nodoCorrente = nodoCorrente->next;
 			}
-			else
-				nodoCorrente = nodoCorrente->next;
+
+			nodoCorrente = nodoCorrente->next;
 		}
 
 		if(trovato==1) {
@@ -280,12 +281,10 @@ void esisteLibro (NODO *head) {
 			NODO *nodoCorr = head;
 
 			while(nodoCorr!=NULL) {
-				if(nodoCorr->libro.anno == annoDaTrovare) {
+				if(nodoCorr->libro.anno == annoDaTrovare)
 					stampaLibro(&(nodoCorr->libro));
-					nodoCorr = nodoCorr->next;
-				}
-				else
-					nodoCorr = nodoCorr->next;
+
+				nodoCorr = nodoCorr->next;
 			}
 		}
 		else
@@ -307,10 +306,9 @@ void esisteLibro (NODO *head) {
 			if(strcmp(nodoCorrente->libro.genere, genereDaTrovare)==0) {
 				trovato = 1;
 				quanti++;
-				nodoCorrente = nodoCorrente->next;
 			}
-			else
-				nodoCorrente = nodoCorrente->next;
+
+			nodoCorrente = nodoCorrente->next;
 		}
 
 		if(trovato==1) {
@@ -322,19 +320,260 @@ void esisteLibro (NODO *head) {
 			NODO *nodoCorr = head;
 
 			while(nodoCorr!=NULL) {
-				if(strcmp(nodoCorr->libro.genere, genereDaTrovare)==0) {
+				if(strcmp(nodoCorr->libro.genere, genereDaTrovare)==0)
 					stampaLibro(&(nodoCorr->libro));
-					nodoCorr = nodoCorr->next;
-				}
-				else
-					nodoCorr = nodoCorr->next;
+
+				nodoCorr = nodoCorr->next;
 			}
 		}
 		else
 			printf("\nNessun libro di questo genere trovato!\n\n");
 	}
+
+	/* RICERCA PER DISPONIBILITA */
+	if(input==6) {
+		int quanti=0;
+
+		while(nodoCorrente!=NULL) {
+			if(nodoCorrente->libro.status == 'd') {
+				trovato=1;
+				quanti++;
+			}
+
+			nodoCorrente = nodoCorrente->next;
+		}
+
+		NODO *nodoCorr = head;
+
+		if(trovato==1) {
+			printf("\nLibri disponibili: %d\nEcco i titoli:\n\n", quanti);
+			while(nodoCorr!=NULL) {
+				if(nodoCorr->libro.status == 'd')
+					printf("%s\n\n", nodoCorr->libro.titolo);
+
+				nodoCorr = nodoCorr->next;
+			}
+		}
+		else
+			printf("\nNessun libro disponibile!\n\n");	
+	}
 }
 
+/**********************************************
+ ************* RICERCA SPECIFICA **************
+ **********************************************/
+
+NODO *cercaPerID (NODO *head, int valore) {
+	NODO *nodoCorrente = head;
+	int trovato=0;
+
+	while(nodoCorrente!=NULL && !trovato) {
+		if(nodoCorrente->libro.id == valore)
+			trovato=1;
+		else
+			nodoCorrente = nodoCorrente->next;
+	}
+
+	return nodoCorrente;
+}
+
+NODO *cercaPerTitolo (NODO *head, char *nome) {
+	NODO *nodoCorrente = head;
+	int trovato=0;
+
+	while(nodoCorrente!=NULL && !trovato) {
+		if(strcmp(nodoCorrente->libro.titolo, nome)==0)
+			trovato=1;
+		else
+			nodoCorrente = nodoCorrente->next;
+	}
+
+	return nodoCorrente;
+}
+
+/**********************************************
+ ************** MODIFICA **********************
+ **********************************************/
+
+void modificaLibro(NODO *head) {
+	NODO *nodoDaModificare;
+
+	int risposta = -1;
+	while(risposta!=0 && risposta!=1) {
+		printf("\nVuoi cercare il libro per ID (0) o per titolo (1)?  ");
+		scanf("%d%*c", &risposta);
+	}
+
+	if(risposta==0) {
+		int idDaModificare;
+		printf("\n\nQual'%c l'ID del libro di cui vuoi modificare i dati?  ", 138);
+		scanf("%d%*c", &idDaModificare);
+
+		nodoDaModificare = cercaPerID(head, idDaModificare);
+		if(nodoDaModificare==NULL) {
+			printf("\nNessun libro con questo ID trovato!\n\n");
+			return;
+		}
+	}
+	else {
+		char titoloDaModificare[30];
+		printf("\n\nQual'%c il titolo del libro di cui vuoi modificare i dati?  ", 138);
+		fgets(titoloDaModificare, 30, stdin);
+		titoloDaModificare[strlen(titoloDaModificare)-1]='\0';
+
+		nodoDaModificare = cercaPerTitolo(head, titoloDaModificare);
+		if(nodoDaModificare==NULL) {
+			printf("\nNessun libro con questo titolo trovato!\n\n");
+			return;
+		}
+	}
+
+	int input = -1;
+	while(input!=1 && input!=2 && input!=3 && input!=4 && input!=5) {
+		printf("\nQuali dati vuoi modificare?\nPremi (1) se il titolo\nPremi (2) se l'autore\nPremi (3) se il numero di pagine\nPremi (4) se l'anno\nPremi (5) se il genere\n");
+		scanf("%d%*c", &input);
+	}
+
+	if(input==1) {
+		char nuovoTitolo[30];
+		printf("Qual'%c il nuovo titolo?  ", 138);
+		fgets(nuovoTitolo, 30, stdin);
+		nuovoTitolo[strlen(nuovoTitolo)-1]='\0';
+
+		strcpy(nodoDaModificare->libro.titolo, nuovoTitolo);
+		printf("Modifica effettuata!\n\n");
+	}
+
+	if(input==2) {
+		char nuovoAutore[30];
+		printf("Qual%c il nuovo autore?  ", 138);
+		fgets(nuovoAutore, 30, stdin);
+		nuovoAutore[strlen(nuovoAutore)-1]='\0';
+
+		strcpy(nodoDaModificare->libro.autore, nuovoAutore);
+		printf("Modifica effettuata!\n\n");
+	}
+
+	if(input==3) {
+		int nuovePagine;
+		printf("Qual'%c il nuovo numero di pagine?  ", 138);
+		scanf("%d%*c", &nuovePagine);
+
+		nodoDaModificare->libro.pagine = nuovePagine;
+		printf("Modifica effettuata!\n\n");
+	}
+
+	if(input==4) {
+		int nuovoAnno;
+		printf("Qual'%c il nuovo anno di pubblicazione?  ", 138);
+		scanf("%d%*c", &nuovoAnno);
+
+		nodoDaModificare->libro.anno = nuovoAnno;
+		printf("Modifica effettuata!\n\n");
+	}
+
+	if(input==5) {
+		char nuovoGenere[30];
+		printf("Qual%c il nuovo genere?  ", 138);
+		fgets(nuovoGenere, 30, stdin);
+		nuovoGenere[strlen(nuovoGenere)-1]='\0';
+
+		strcpy(nodoDaModificare->libro.genere, nuovoGenere);
+		printf("Modifica effettuata!\n\n");
+	}
+}
+
+/**********************************************
+ *************** PRESTITO *********************
+ **********************************************/
+
+void prestaLibro (NODO *head) {
+	NODO *nodoDaPrestare;
+
+	int risposta = -1;
+	while(risposta!=0 && risposta!=1) {
+		printf("\nVuoi cercare il libro per ID (0) o per titolo (1)?  ");
+		scanf("%d%*c", &risposta);
+	}
+
+	if(risposta==0) {
+		int idDaPrestare;
+		printf("\n\nQual'%c l'ID del libro che desidera?  ", 138);
+		scanf("%d%*c", &idDaPrestare);
+
+		nodoDaPrestare = cercaPerID(head, idDaPrestare);
+		if(nodoDaPrestare==NULL) {
+			printf("\nNessun libro con questo ID trovato!\n\n");
+			return;
+		}
+	}
+	else {
+		char titolodaPrestare[30];
+		printf("\n\nQual'%c il titolo del libro che desidera?  ", 138);
+		fgets(titolodaPrestare, 30, stdin);
+		titolodaPrestare[strlen(titolodaPrestare)-1]='\0';
+
+		nodoDaPrestare = cercaPerTitolo(head, titolodaPrestare);
+		if(nodoDaPrestare==NULL) {
+			printf("\nNessun libro con questo titolo trovato!\n\n");
+			return;
+		}
+	}
+
+	if(nodoDaPrestare->libro.status == 'd') {
+		printf("\nIl libro %c disponibile!\n", 138);
+		nodoDaPrestare->libro.status = 'p';
+		printf("Prestito effettuato!\n\n");
+	}
+	else
+		printf("\nIl libro non %c disponibile!\n\n", 138);
+}
+
+/**********************************************
+ *************** RESTITUZIONE *****************
+ **********************************************/
+
+void restituisciLibro (NODO *head) {
+	NODO *nodoDaRestituire;
+
+	int risposta = -1;
+	while(risposta!=0 && risposta!=1) {
+		printf("\nVuoi cercare il libro per ID (0) o per titolo (1)?  ");
+		scanf("%d%*c", &risposta);
+	}
+
+
+	if(risposta==0) {
+		int idDaRestituire;
+		printf("\n\nQual'%c l'ID del libro che desidera?  ", 138);
+		scanf("%d%*c", &idDaRestituire);
+
+		nodoDaRestituire = cercaPerID(head, idDaRestituire);
+		if(nodoDaRestituire==NULL) {
+			printf("\nNessun libro con questo ID trovato!\n\n");
+			return;
+		}
+	}
+	else {
+		char titolodaRestituire[30];
+		printf("\n\nQual'%c il titolo del libro che desidera?  ", 138);
+		fgets(titolodaRestituire, 30, stdin);
+		titolodaRestituire[strlen(titolodaRestituire)-1]='\0';
+
+		nodoDaRestituire = cercaPerTitolo(head, titolodaRestituire);
+		if(nodoDaRestituire==NULL) {
+			printf("\nNessun libro con questo titolo trovato!\n\n");
+			return;
+		}
+	}
+
+	if(nodoDaRestituire->libro.status == 'p') {
+		nodoDaRestituire->libro.status = 'd';
+		printf("\nRestituzione effettuata!\n\n");
+	}
+	else 
+		printf("\nIl libro con questo ID %c gi%c presente!\n\n", 138, 133);
+}
 
 /**********************************************
  **************** FILE ************************
@@ -357,7 +596,7 @@ NODO *acquisizione (NODO *head, int *prossimo_id) {
 
 		int massimo_id=0;
 
-		while(fscanf(fp, "%d%*c%[^\t]%*c%[^\t]%*c%d%*c%d%*c%[^\t]%*c%c%*c", &id, titolo, autore, &pagine, &anno, genere, &status)>0) {
+		while(fscanf(fp, "%d%*c%[^\t]%*c%[^\t]%*c%d%*c%d%*c%[^\t]%*c%c%*c", &id, titolo, autore, &pagine, &anno, genere, &status)==7) {
 
 				NODO *nuovoNodo = malloc(sizeof(NODO));
 				if(nuovoNodo==NULL) {
@@ -375,6 +614,8 @@ NODO *acquisizione (NODO *head, int *prossimo_id) {
 				nuovoNodo->libro.anno=anno;
 				strcpy(nuovoNodo->libro.genere, genere);
 				nuovoNodo->libro.status=status;
+
+				nuovoNodo->next = NULL;
 
 				/* inserimento in coda */
 				if(head==NULL)
@@ -425,7 +666,7 @@ int main() {
 	int prossimo_id = 1;
 
 	printf("Vuoi caricare la lista da un file (1) o digitarla te (0)?  ");
-	scanf("%d", &input);
+	scanf("%d%*c", &input);
 	
 	if(input==1)
 		head=acquisizione(head, &prossimo_id);
@@ -438,6 +679,9 @@ int main() {
 		printf("2: Inserimento\n");
 		printf("3: Cancellazione\n");
 		printf("4: Ricerca\n");
+		printf("5: Modifica\n");
+		printf("6: Prestito\n");
+		printf("7: Restituzione\n");
 		printf("0: Termina il programma\n\n");
 		scanf("%d%*c", &risposta);
 
@@ -448,7 +692,13 @@ int main() {
 		else if(risposta==3)
 			head=cancellaLibro(head);
 		else if(risposta==4)
-			esisteLibro(head);
+			cercaLibro(head);
+		else if(risposta==5)
+			modificaLibro(head);
+		else if(risposta==6)
+			prestaLibro(head);
+		else if(risposta==7)
+			restituisciLibro(head);
 		else if(risposta==0) {
 			printf("Finito!\n\n");
 			salvataggio(head);
