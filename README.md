@@ -8,12 +8,24 @@ Il programma si occupa di gestire una biblioteca, permettendo di inserire ed eli
 
 ## Funzionalità attuali
 
-- Visualizzazione dei libri
-- Inserimento di libri
-- Eliminazione di libri
-- Assegnazione automatica di ID univoci
-- Salvataggio dei dati su file
-- Caricamento dei dati da file
+Il programma permette di:
+
+- Visualizzazione tutti i libri presenti nella biblioteca
+- Inserire nuovi libri
+- Assegnare automaticamente ID univoci
+- Cancellare un libro tramite il titolo
+- Cercare libri tramite:
+	- Titolo
+	- Autore
+	- ID
+	- Anno di Pubblicazione
+	- Genere
+	- Disponibilità
+- Modificare i dati di un libro tramite ID o titolo
+- Effettuare il prestito di un libro tramite ID o titolo
+- Registrare la restituzione di un libro tramite ID o titolo
+- Salvare i dati della biblioteca su file
+- Caricare automaticamente i dati da file all'avvio del programma
 
 ## Strutture e concetti utilizzati
 
@@ -25,9 +37,9 @@ Il programma si occupa di gestire una biblioteca, permettendo di inserire ed eli
 
 ## Sviluppi futuri
 
-- Ricerca di libri
-- Gestione dei prestiti
 - Statistiche
+- Ordinamento libri per criterio
+- Interfaccia
 
 ## Come compilare ed eseguire il codice
 
