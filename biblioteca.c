@@ -576,6 +576,63 @@ void restituisciLibro (NODO *head) {
 }
 
 /**********************************************
+ *************** STATISTICHE ******************
+ **********************************************/
+
+void statistiche(NODO *head) {
+
+	if(head==NULL) {
+		printf("\nBiblioteca vuota!\n\n");
+		return;
+	}
+
+	int quantiLibri=0;
+	int quantiDisponibili=0;
+	int quantiPrestati=0;
+	int sommaPagine=0;
+	int sommaAnni=0;
+
+	NODO *nodoCorrente = head;
+	
+	NODO *libroPiuVecchio = head;
+	NODO *libroPiuRecente = head;
+
+	while(nodoCorrente!=NULL) {
+		quantiLibri++;
+
+		if(nodoCorrente->libro.status == 'd')
+			quantiDisponibili++;
+		else
+			quantiPrestati++;
+
+		sommaPagine += nodoCorrente->libro.pagine;
+		sommaAnni += nodoCorrente->libro.anno;
+
+		if(nodoCorrente->libro.anno < libroPiuVecchio->libro.anno)
+			libroPiuVecchio = nodoCorrente;
+
+		if(nodoCorrente->libro.anno > libroPiuRecente->libro.anno)
+			libroPiuRecente = nodoCorrente;
+
+		nodoCorrente = nodoCorrente->next;
+	}
+
+	printf("\nSTATISTICHE:\n\n");
+
+	printf("LIBRI TOTALI: %d\n", quantiLibri);
+	printf("DISPONIBILI: %d\n", quantiDisponibili);
+	printf("PRESTATI: %d\n", quantiPrestati);
+	double percentuale = ((double)quantiPrestati/quantiLibri)*100.0;
+	printf("PERCENTUALE LIBRI PRESTATI: %.2f%%\n\n", percentuale);
+
+	printf("MEDIA DELLE PAGINE: %d\n", sommaPagine/quantiLibri);
+	printf("ANNO MEDIO: %d\n\n", sommaAnni/quantiLibri);
+
+	printf("LIBRO PI%c VECCHIO: %s, %d\n", 235, libroPiuVecchio->libro.titolo, libroPiuVecchio->libro.anno);
+	printf("LIBRO PI%c RECENTE: %s, %d\n", 235, libroPiuRecente->libro.titolo, libroPiuRecente->libro.anno);
+}
+
+/**********************************************
  **************** FILE ************************
  **********************************************/
 
@@ -682,6 +739,7 @@ int main() {
 		printf("5: Modifica\n");
 		printf("6: Prestito\n");
 		printf("7: Restituzione\n");
+		printf("8: Statistiche\n");
 		printf("0: Termina il programma\n\n");
 		scanf("%d%*c", &risposta);
 
@@ -699,6 +757,8 @@ int main() {
 			prestaLibro(head);
 		else if(risposta==7)
 			restituisciLibro(head);
+		else if(risposta==8)
+			statistiche(head);
 		else if(risposta==0) {
 			printf("Finito!\n\n");
 			salvataggio(head);

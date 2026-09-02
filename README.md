@@ -24,6 +24,7 @@ Il programma permette di:
 - Modificare i dati di un libro tramite ID o titolo
 - Effettuare il prestito di un libro tramite ID o titolo
 - Registrare la restituzione di un libro tramite ID o titolo
+- Analizzare statistiche sui vari dati della biblioteca
 - Salvare i dati della biblioteca su file
 - Caricare automaticamente i dati da file all'avvio del programma
 
@@ -37,9 +38,7 @@ Il programma permette di:
 
 ## Sviluppi futuri
 
-- Statistiche
 - Ordinamento libri per criterio
-- Interfaccia
 
 ## Come compilare ed eseguire il codice
 
