@@ -498,7 +498,7 @@ void prestaLibro (NODO *head) {
 
 	if(risposta==0) {
 		int idDaPrestare;
-		printf("\n\nQual'%c l'ID del libro che desidera?  ", 138);
+		printf("\n\nQual'%c l'ID del libro che desideri?  ", 138);
 		scanf("%d%*c", &idDaPrestare);
 
 		nodoDaPrestare = cercaPerID(head, idDaPrestare);
@@ -509,7 +509,7 @@ void prestaLibro (NODO *head) {
 	}
 	else {
 		char titolodaPrestare[30];
-		printf("\n\nQual'%c il titolo del libro che desidera?  ", 138);
+		printf("\n\nQual'%c il titolo del libro che desideri?  ", 138);
 		fgets(titolodaPrestare, 30, stdin);
 		titolodaPrestare[strlen(titolodaPrestare)-1]='\0';
 
@@ -545,7 +545,7 @@ void restituisciLibro (NODO *head) {
 
 	if(risposta==0) {
 		int idDaRestituire;
-		printf("\n\nQual'%c l'ID del libro che desidera?  ", 138);
+		printf("\n\nQual'%c l'ID del libro che vuoi restituire?  ", 138);
 		scanf("%d%*c", &idDaRestituire);
 
 		nodoDaRestituire = cercaPerID(head, idDaRestituire);
@@ -556,7 +556,7 @@ void restituisciLibro (NODO *head) {
 	}
 	else {
 		char titolodaRestituire[30];
-		printf("\n\nQual'%c il titolo del libro che desidera?  ", 138);
+		printf("\n\nQual'%c il titolo del libro che vuoi restituire?  ", 138);
 		fgets(titolodaRestituire, 30, stdin);
 		titolodaRestituire[strlen(titolodaRestituire)-1]='\0';
 
