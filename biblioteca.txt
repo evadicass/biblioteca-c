@@ -1,10 +1,22 @@
-1	1984	George Orwell	328	1949	Distopico	d
-2	Il conte di Montecristo	Alexandre Dumas	1247	1844	Avventura	d
-3	Dune	Frank Herbert	688	1965	Fantascienza	p
-4	Il nome della rosa	Umberto Eco	503	1980	Giallo storico	d
-5	Orgoglio e pregiudizio	Jane Austen	432	1813	Romanzo rosa	d
-6	Il grande Gatsby	F. Scott Fitzgerald	180	1925	Drammatico	d
-7	Le metamorfosi	Franz Kafka	120	1915	Racconto	p
-8	Cime tempestose	Emily Bronte	400	1847	Drammatico	d
-9	Il ritratto di Dorian Gray	Oscar Wilde	256	1890	Racconto	d
-10	La fattoria degli animali	George Orwell	140	1945	Distopico	d
+1	1984	George Orwell	328	1949	Distopia	p
+2	Il conte di Montecristo	Alexandre Dumas	1247	1844	Avventura	p
+3	Dune	Frank Herbert	688	1965	Fantascienza	d
+4	Il nome della rosa	Umberto Eco	503	1980	Giallo	d
+5	Orgoglio e pregiudizio	Jane Austen	432	1813	Romanzo	p
+6	Il grande Gatsby	F. Scott Fitzgerald	180	1925	Romanzo	p
+7	Le metamorfosi	Franz Kafka	120	1915	Fantastico	d
+8	Cime tempestose	Emily Bronte	400	1847	Drammatico	p
+9	Il ritratto di Dorian Gray	Oscar Wilde	256	1890	Racconto	p
+10	La fattoria degli animali	George Orwell	140	1945	Distopia	d
+11	Harry Potter e la pietra filosofale	J.K. Rowling	336	1997	Fantasy	p
+12	Lo Hobbit	J.R.R. Tolkien	310	1937	Fantasy	d
+13	It	Stephen King	1184	1986	Horror	d
+14	Assassinio sull'Orient Express	Agatha Christie	256	1934	Giallo	d
+15	Dracula	Bram Stoker	488	1897	Horror	d
+16	Harry Potter e la camera dei segreti	J.K. Rowling	352	1998	Fantasy	p
+17	Harry Potter e il prigioniero di Azkaban	J.K. Rowling	448	1999	Fantasy	d
+18	Norwegian Wood	Haruki Murakami	320	1987	Romanzo	p
+19	Il processo	Franz Kafka	272	1925	Romanzo	d
+20	Frankestein	Mary Shelley	280	1818	Horror	p
+21	Il Signore degli Anelli	J.R.R. Tolkien	1178	1954	Fantasy	d
+22	Dieci piccoli indiani	Agatha Christie	272	1939	Giallo	d

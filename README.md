@@ -36,10 +36,6 @@ Il programma permette di:
 - Allocazione dinamica della memoria
 - Gestione dei file
 
-## Sviluppi futuri
-
-- Ordinamento libri per criterio
-
 ## Come compilare ed eseguire il codice
 
 Per far funzionare questo progetto hai bisogno di un compilatore C (come GCC o Clang) installato nel tuo sistema.

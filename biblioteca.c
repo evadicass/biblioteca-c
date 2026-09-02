@@ -8,7 +8,7 @@
 
 typedef struct Libro {
 	int id;
-	char titolo[30];
+	char titolo[100];
 	char autore[30];
 	int pagine;
 	int anno;
@@ -43,7 +43,7 @@ void stampaLista (NODO *head) {
 	NODO *nodoCorrente = head;
 
 	if(head==NULL)
-		printf("Biblioteca vuota!\n\n");
+		printf("\nBiblioteca vuota: nessun libro da visualizzare!\n\n");
 	else {
 		printf("Ecco la lista dei libri:\n\n");
 		while(nodoCorrente != NULL) {
@@ -60,7 +60,7 @@ void stampaLista (NODO *head) {
 void inserisciLibro(LIBRO *libro) {
 
 	printf("Come si intitola il libro?  ");
-	fgets(libro->titolo, 30, stdin);
+	fgets(libro->titolo, 100, stdin);
 	(libro->titolo)[strlen(libro->titolo)-1]='\0';
 
 	printf("\nCome si chiama l'autore?  ");
@@ -116,9 +116,9 @@ NODO *cancellaLibro (NODO *head) {
 		return head;
 	}
 
-	char libroDaCancellare[30];
+	char libroDaCancellare[100];
 	printf("Come si intitola il libro da eliminare?  ");
-	fgets(libroDaCancellare, 30, stdin);
+	fgets(libroDaCancellare, 100, stdin);
 	libroDaCancellare[strlen(libroDaCancellare)-1]='\0';
 
 	int eliminato = 0;
@@ -151,6 +151,9 @@ NODO *cancellaLibro (NODO *head) {
 		}
 	}
 
+	if(eliminato==0)
+		printf("Nessun libro con questo titolo trovato!\n\n");
+
 	return head;
 }
 
@@ -176,9 +179,9 @@ void cercaLibro (NODO *head) {
 	/* RICERCA PER TITOLO */
 	if(input==1) {
 
-		char titoloDaTrovare[30];
+		char titoloDaTrovare[100];
 		printf("\nCome si intitola il libro da cercare?  ");
-		fgets(titoloDaTrovare, 30, stdin);
+		fgets(titoloDaTrovare,100, stdin);
 		titoloDaTrovare[strlen(titoloDaTrovare)-1]='\0';
 
 		while(nodoCorrente!=NULL && !trovato) {
@@ -198,9 +201,9 @@ void cercaLibro (NODO *head) {
 	/* RICERCA PER AUTORE */
 	if(input==2) {
 
-		char autoreDaTrovare[30];
+		char autoreDaTrovare[100];
 		printf("\nDi quale autore cerchi il libro?  ");
-		fgets(autoreDaTrovare, 30, stdin);
+		fgets(autoreDaTrovare, 100, stdin);
 		autoreDaTrovare[strlen(autoreDaTrovare)-1]='\0';
 
 		int quanti=0;
@@ -295,9 +298,9 @@ void cercaLibro (NODO *head) {
 	/* RICERCA PER GENERE */
 	if(input==5) {
 
-		char genereDaTrovare[30];
+		char genereDaTrovare[100];
 		printf("\nDi quale genere cerchi il libro?  ");
-		fgets(genereDaTrovare, 30, stdin);
+		fgets(genereDaTrovare, 100, stdin);
 		genereDaTrovare[strlen(genereDaTrovare)-1]='\0';
 
 		int quanti=0;
@@ -398,6 +401,11 @@ NODO *cercaPerTitolo (NODO *head, char *nome) {
 void modificaLibro(NODO *head) {
 	NODO *nodoDaModificare;
 
+	if(head==NULL) {
+		printf("\nBiblioteca vuota: nessun libro da modificare!\n\n");
+		return;
+	}
+
 	int risposta = -1;
 	while(risposta!=0 && risposta!=1) {
 		printf("\nVuoi cercare il libro per ID (0) o per titolo (1)?  ");
@@ -416,9 +424,9 @@ void modificaLibro(NODO *head) {
 		}
 	}
 	else {
-		char titoloDaModificare[30];
+		char titoloDaModificare[100];
 		printf("\n\nQual'%c il titolo del libro di cui vuoi modificare i dati?  ", 138);
-		fgets(titoloDaModificare, 30, stdin);
+		fgets(titoloDaModificare, 100, stdin);
 		titoloDaModificare[strlen(titoloDaModificare)-1]='\0';
 
 		nodoDaModificare = cercaPerTitolo(head, titoloDaModificare);
@@ -430,14 +438,14 @@ void modificaLibro(NODO *head) {
 
 	int input = -1;
 	while(input!=1 && input!=2 && input!=3 && input!=4 && input!=5) {
-		printf("\nQuali dati vuoi modificare?\nPremi (1) se il titolo\nPremi (2) se l'autore\nPremi (3) se il numero di pagine\nPremi (4) se l'anno\nPremi (5) se il genere\n");
+		printf("\nQuali dati vuoi modificare?\nPremi (1) se il titolo\nPremi (2) se l'autore\nPremi (3) se il numero di pagine\nPremi (4) se l'anno\nPremi (5) se il genere\n\n");
 		scanf("%d%*c", &input);
 	}
 
 	if(input==1) {
-		char nuovoTitolo[30];
-		printf("Qual'%c il nuovo titolo?  ", 138);
-		fgets(nuovoTitolo, 30, stdin);
+		char nuovoTitolo[100];
+		printf("\nQual'%c il nuovo titolo?  ", 138);
+		fgets(nuovoTitolo, 100, stdin);
 		nuovoTitolo[strlen(nuovoTitolo)-1]='\0';
 
 		strcpy(nodoDaModificare->libro.titolo, nuovoTitolo);
@@ -445,9 +453,9 @@ void modificaLibro(NODO *head) {
 	}
 
 	if(input==2) {
-		char nuovoAutore[30];
-		printf("Qual%c il nuovo autore?  ", 138);
-		fgets(nuovoAutore, 30, stdin);
+		char nuovoAutore[100];
+		printf("\nQual%c il nuovo autore?  ", 138);
+		fgets(nuovoAutore, 100, stdin);
 		nuovoAutore[strlen(nuovoAutore)-1]='\0';
 
 		strcpy(nodoDaModificare->libro.autore, nuovoAutore);
@@ -456,7 +464,7 @@ void modificaLibro(NODO *head) {
 
 	if(input==3) {
 		int nuovePagine;
-		printf("Qual'%c il nuovo numero di pagine?  ", 138);
+		printf("\nQual'%c il nuovo numero di pagine?  ", 138);
 		scanf("%d%*c", &nuovePagine);
 
 		nodoDaModificare->libro.pagine = nuovePagine;
@@ -465,7 +473,7 @@ void modificaLibro(NODO *head) {
 
 	if(input==4) {
 		int nuovoAnno;
-		printf("Qual'%c il nuovo anno di pubblicazione?  ", 138);
+		printf("\nQual'%c il nuovo anno di pubblicazione?  ", 138);
 		scanf("%d%*c", &nuovoAnno);
 
 		nodoDaModificare->libro.anno = nuovoAnno;
@@ -473,9 +481,9 @@ void modificaLibro(NODO *head) {
 	}
 
 	if(input==5) {
-		char nuovoGenere[30];
-		printf("Qual%c il nuovo genere?  ", 138);
-		fgets(nuovoGenere, 30, stdin);
+		char nuovoGenere[100];
+		printf("\nQual%c il nuovo genere?  ", 138);
+		fgets(nuovoGenere, 100, stdin);
 		nuovoGenere[strlen(nuovoGenere)-1]='\0';
 
 		strcpy(nodoDaModificare->libro.genere, nuovoGenere);
@@ -489,6 +497,11 @@ void modificaLibro(NODO *head) {
 
 void prestaLibro (NODO *head) {
 	NODO *nodoDaPrestare;
+
+	if(head==NULL) {
+		printf("\nBiblioteca vuota: nessun libro da prestare!\n\n");
+		return;
+	}
 
 	int risposta = -1;
 	while(risposta!=0 && risposta!=1) {
@@ -508,9 +521,9 @@ void prestaLibro (NODO *head) {
 		}
 	}
 	else {
-		char titolodaPrestare[30];
+		char titolodaPrestare[100];
 		printf("\n\nQual'%c il titolo del libro che desideri?  ", 138);
-		fgets(titolodaPrestare, 30, stdin);
+		fgets(titolodaPrestare, 100, stdin);
 		titolodaPrestare[strlen(titolodaPrestare)-1]='\0';
 
 		nodoDaPrestare = cercaPerTitolo(head, titolodaPrestare);
@@ -536,9 +549,14 @@ void prestaLibro (NODO *head) {
 void restituisciLibro (NODO *head) {
 	NODO *nodoDaRestituire;
 
+	if(head==NULL) {
+		printf("\nBiblioteca vuota: nessun libro da restituire!\n\n");
+		return;
+	}
+
 	int risposta = -1;
 	while(risposta!=0 && risposta!=1) {
-		printf("\nVuoi cercare il libro per ID (0) o per titolo (1)?  ");
+		printf("\nVuoi restituire il libro per ID (0) o per titolo (1)?  ");
 		scanf("%d%*c", &risposta);
 	}
 
@@ -555,9 +573,9 @@ void restituisciLibro (NODO *head) {
 		}
 	}
 	else {
-		char titolodaRestituire[30];
+		char titolodaRestituire[100];
 		printf("\n\nQual'%c il titolo del libro che vuoi restituire?  ", 138);
-		fgets(titolodaRestituire, 30, stdin);
+		fgets(titolodaRestituire, 100, stdin);
 		titolodaRestituire[strlen(titolodaRestituire)-1]='\0';
 
 		nodoDaRestituire = cercaPerTitolo(head, titolodaRestituire);
@@ -582,7 +600,7 @@ void restituisciLibro (NODO *head) {
 void statistiche(NODO *head) {
 
 	if(head==NULL) {
-		printf("\nBiblioteca vuota!\n\n");
+		printf("\nBiblioteca vuota: nessuna statistica possibile!\n\n");
 		return;
 	}
 
@@ -597,6 +615,7 @@ void statistiche(NODO *head) {
 	NODO *libroPiuVecchio = head;
 	NODO *libroPiuRecente = head;
 
+	// STATISTICHE SEMPLICI
 	while(nodoCorrente!=NULL) {
 		quantiLibri++;
 
@@ -617,6 +636,7 @@ void statistiche(NODO *head) {
 		nodoCorrente = nodoCorrente->next;
 	}
 
+
 	printf("\nSTATISTICHE:\n\n");
 
 	printf("LIBRI TOTALI: %d\n", quantiLibri);
@@ -629,7 +649,7 @@ void statistiche(NODO *head) {
 	printf("ANNO MEDIO: %d\n\n", sommaAnni/quantiLibri);
 
 	printf("LIBRO PI%c VECCHIO: %s, %d\n", 235, libroPiuVecchio->libro.titolo, libroPiuVecchio->libro.anno);
-	printf("LIBRO PI%c RECENTE: %s, %d\n", 235, libroPiuRecente->libro.titolo, libroPiuRecente->libro.anno);
+	printf("LIBRO PI%c RECENTE: %s, %d\n\n", 235, libroPiuRecente->libro.titolo, libroPiuRecente->libro.anno);
 }
 
 /**********************************************
@@ -644,7 +664,7 @@ NODO *acquisizione (NODO *head, int *prossimo_id) {
 	else {
 
 		int id;
-		char titolo[30];
+		char titolo[100];
 		char autore[30];
 		int pagine;
 		int anno;
@@ -760,7 +780,7 @@ int main() {
 		else if(risposta==8)
 			statistiche(head);
 		else if(risposta==0) {
-			printf("Finito!\n\n");
+			printf("Finito!\n");
 			salvataggio(head);
 		}
 		else
